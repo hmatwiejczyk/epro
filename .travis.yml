@@ -4,32 +4,30 @@ services:
   - docker
 
 before_install:
-  - docker build -t hmatwiejczyk/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t hmatwiejczyk/next-test -f ./frontend/Dockerfile.dev ./frontend
 
 script:
-  - docker run -e CI=true hmatwiejczyk/react-test npm test
+  - docker run hmatwiejczyk/next-test yarn test
 
 after_success:
-  - docker build -t hmatwiejczyk/multi-client ./client
-  - docker build -t hmatwiejczyk/multi-nginx ./nginx
-  - docker build -t hmatwiejczyk/multi-server ./server
-  - docker build -t hmatwiejczyk/multi-worker ./worker
+  - docker build -t hmatwiejczyk/epro-frontend ./client
+  - docker build -t hmatwiejczyk/epro-backend ./backend
+  - docker build -t hmatwiejczyk/epro-nginx ./nginx
   - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_ID" --password-stdin
-  - docker push hmatwiejczyk/multi-client
-  - docker push hmatwiejczyk/multi-nginx
-  - docker push hmatwiejczyk/multi-server
-  - docker push hmatwiejczyk/multi-worker
+  - docker push hmatwiejczyk/epro-frontend
+  - docker push hmatwiejczyk/epro-backend
+  - docker push hmatwiejczyk/epro-nginx
 
-deploy:
-  edge: true
-  provider: elasticbeanstalk
-  region: "eu-central-1"
-  app: "multi-docker"
-  env: "MultiDocker-env"
-  bucket_name: "elasticbeanstalk-eu-central-1-260709656626"
-  bucket_path: "docker-multi"
-  on:
-    branch: master
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
+# deploy:
+#   edge: true
+#   provider: elasticbeanstalk
+#   region: "eu-central-1"
+#   app: "multi-docker"
+#   env: "MultiDocker-env"
+#   bucket_name: "elasticbeanstalk-eu-central-1-260709656626"
+#   bucket_path: "docker-multi"
+#   on:
+#     branch: master
+#   access_key_id: $AWS_ACCESS_KEY
+#   secret_access_key: $AWS_SECRET_KEY
 

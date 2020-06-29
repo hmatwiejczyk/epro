@@ -1,0 +1,40 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    container_name: "mongo"
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 27017:27017
+  nginx:
+    depends_on: 
+      - api
+      - frontend
+    restart: always
+    build: 
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports: 
+      - '3050:80'
+  api:
+    depends_on: 
+      - mongo
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./server
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment: 
+      - MONGO_URI=mongodb://root:example@mongo:27017
+  frontend:
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./frontend
+    volumes: 
+      - /app/node_modules
+      - ./frontend:/app
+    stdin_open: true

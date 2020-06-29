@@ -14,6 +14,7 @@ const IndexPage = () => {
 
   return (
     <div className="App">
+      <h2>List of users</h2>
       {users.map((user: any, index: number) => {
         return (
           <p key={index}>

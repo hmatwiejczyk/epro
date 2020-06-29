@@ -10,7 +10,7 @@ script:
   - docker run hmatwiejczyk/next-test yarn test
 
 after_success:
-  - docker build -t hmatwiejczyk/epro-frontend ./client
+  - docker build -t hmatwiejczyk/epro-frontend ./frontend
   - docker build -t hmatwiejczyk/epro-backend ./backend
   - docker build -t hmatwiejczyk/epro-nginx ./nginx
   - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_ID" --password-stdin

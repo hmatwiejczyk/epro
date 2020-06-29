@@ -4,14 +4,14 @@
     {
       "name": "frontend",
       "image": "hmatwiejczyk/epro-frontend",
-      "hostname": "client",
+      "hostname": "frontend",
       "essential": false,
       "memory": 128
     },
     {
       "name": "backend",
       "image": "hmatwiejczyk/epro-frontend",
-      "hostname": "api",
+      "hostname": "backend",
       "essential": false,
       "memory": 128
     },

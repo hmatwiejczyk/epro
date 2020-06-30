@@ -5,8 +5,10 @@ import { User } from './models/User';
 const app: Application = express();
 
 app.get('/users', async (req, res) => {
-  // const allUsers = await User.find();
-  const allUsers = 'hej';
+  const allUsers = await User.find();
+  if (!allUsers) {
+    throw new Error('No users found');
+  }
   res.status(200).send(allUsers);
 });
 app.get('/new-user', async (req, res) => {

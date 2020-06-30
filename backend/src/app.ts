@@ -5,7 +5,8 @@ import { User } from './models/User';
 const app: Application = express();
 
 app.get('/users', async (req, res) => {
-  const allUsers = await User.find();
+  // const allUsers = await User.find();
+  const allUsers = 'hej';
   res.status(200).send(allUsers);
 });
 app.get('/new-user', async (req, res) => {

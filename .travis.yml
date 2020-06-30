@@ -18,16 +18,16 @@ after_success:
   - docker push hmatwiejczyk/epro-backend
   - docker push hmatwiejczyk/epro-nginx
 
-# deploy:
-#   edge: true
-#   provider: elasticbeanstalk
-#   region: "eu-central-1"
-#   app: "multi-docker"
-#   env: "MultiDocker-env"
-#   bucket_name: "elasticbeanstalk-eu-central-1-260709656626"
-#   bucket_path: "docker-multi"
-#   on:
-#     branch: master
-#   access_key_id: $AWS_ACCESS_KEY
-#   secret_access_key: $AWS_SECRET_KEY
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "epro"
+  env: "Epro-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-260709656626"
+  bucket_path: "epro"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
 

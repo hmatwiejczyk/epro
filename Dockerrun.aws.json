@@ -10,7 +10,7 @@
     },
     {
       "name": "backend",
-      "image": "hmatwiejczyk/epro-frontend",
+      "image": "hmatwiejczyk/epro-backend",
       "hostname": "backend",
       "essential": false,
       "memory": 128

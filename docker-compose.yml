@@ -2,15 +2,15 @@ version: '3'
 services:
   mongo:
     image: mongo
-    container_name: "mongo"
+    container_name: 'mongo'
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_PASSWORD: password
     ports:
       - 27017:27017
   backend:
-    depends_on: 
+    depends_on:
       - mongo
     build:
       dockerfile: Dockerfile.dev
@@ -18,23 +18,23 @@ services:
     volumes:
       - /app/node_modules
       - ./backend:/app
-    environment: 
-      - MONGO_URI=mongodb://root:example@mongo:27017
+    environment:
+      MONGO_URI: mongodb://root:password@mongo:27017
   frontend:
-    build: 
+    build:
       dockerfile: Dockerfile.dev
       context: ./frontend
-    volumes: 
+    volumes:
       - /app/node_modules
       - ./frontend:/app
     stdin_open: true
   nginx:
-    depends_on: 
+    depends_on:
       - backend
       - frontend
     restart: always
-    build: 
+    build:
       dockerfile: Dockerfile
       context: ./nginx
-    ports: 
+    ports:
       - '3050:80'

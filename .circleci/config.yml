@@ -31,12 +31,12 @@ workflows:
   version: 2.1
   build_and_test:
     jobs:
-      - test-frontend
+      - test-frontend:
           filters:
             branches:
               only:
               - circleci-project-setup
-      - build-frontend
+      - build-frontend:
           filters:
             branches:
               only:

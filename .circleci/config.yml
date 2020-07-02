@@ -29,7 +29,7 @@ jobs:
       - run:
           name: login docker
           command: echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_ID" --password-stdin
-      -run:
+      - run:
           name: push frontend image
           command: docker push hmatwiejczyk/epro-frontend
 

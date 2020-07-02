@@ -40,7 +40,7 @@ workflows:
           filters:
             branches:
               only:
-              - circleci-project-setup
+              - master
       
 # version: 2
 # jobs:

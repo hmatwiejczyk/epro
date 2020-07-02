@@ -37,10 +37,12 @@ workflows:
               only:
               - circleci-project-setup
       - build-frontend:
+          requires:
+            - test-frontend
           filters:
             branches:
               only:
-              - master
+              - circleci-project-setup
       
 # version: 2
 # jobs:

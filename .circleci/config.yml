@@ -32,8 +32,9 @@ workflows:
   test:
     jobs:
       - test-frontend:
-          ignore:
-            - circleci-project-setup
+          branches:
+            ignore:
+              - circleci-project-setup
 
   build_and_test:
     jobs:

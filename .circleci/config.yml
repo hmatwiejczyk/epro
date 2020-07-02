@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  test-1:
+  test-frontend:
     docker:
       - image: node:12.13.0
     working_directory: ~/repo/frontend
@@ -22,7 +22,7 @@ workflows:
   version: 2.1
   test:
     jobs:
-      - test-1
+      - test-frontend
 # version: 2
 # jobs:
 #   test:

@@ -4,11 +4,10 @@ jobs:
     docker:
       - image: node:11.10.1
 
-    working_directory: ~/epro/frontend
+    working_directory: ~/repo
 
     steps:
       - checkout
-        path: ~/epro
 
       # Download and cache dependencies
       - restore_cache:
@@ -25,8 +24,4 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: yarn test
-
-      - run: yarn build
-
-      - run: yarn netlify:deploy
+      - run: yarn --prefix ./frontend test

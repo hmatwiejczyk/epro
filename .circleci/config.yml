@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker: 
-      - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
+      - image: docker:17.05.0-ce-git
     steps:
       - checkout # check out the code in the project directory
       - run: docker build -t hmatwiejczyk/next-test -f ./frontend/Dockerfile.dev ./frontend

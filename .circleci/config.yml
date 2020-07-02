@@ -4,10 +4,11 @@ jobs:
     docker:
       - image: node:11.10.1
 
-    working_directory: ~/frontend
+    working_directory: ~/epro/frontend
 
     steps:
       - checkout
+        path: ~/epro
 
       # Download and cache dependencies
       - restore_cache:

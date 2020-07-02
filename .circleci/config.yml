@@ -30,8 +30,9 @@ jobs:
 workflows:
   version: 2.1
   build_and_test:
-    - test-frontend
-    - build-frontend
+    jobs:
+      - test-frontend
+      - build-frontend
       
 # version: 2
 # jobs:

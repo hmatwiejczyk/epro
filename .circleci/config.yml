@@ -34,10 +34,12 @@ workflows:
       - test-frontend
           filters:
             branches:
+              only:
               - circleci-project-setup
       - build-frontend
           filters:
             branches:
+              only:
               - circleci-project-setup
       
 # version: 2

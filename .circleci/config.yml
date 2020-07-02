@@ -1,34 +1,34 @@
-# version: 2.1
+version: 2.1
+jobs:
+  test:
+    docker:
+      - image: node:12.13.0
+    working_directory: ~/repo/frontend
+    steps:
+      - checkout:
+          path: ~/repo
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: yarn test
+
+# version: 2
 # jobs:
 #   test:
 #     docker:
-#       - image: node:12.13.0
-#     working_directory: ~/repo/frontend
+#       - image: circleci/node:10
 #     steps:
-#       - checkout:
-#           path: ~/repo
-#       - restore_cache:
-#           keys:
-#             - v1-dependencies-{{ checksum "package.json" }}
-#             - v1-dependencies-
-#       - run: yarn install
-#       - save_cache:
-#           paths:
-#             - node_modules
-#           key: v1-dependencies-{{ checksum "package.json" }}
-#       - run: yarn test
-
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/node:10
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: build container
-          command: docker build -t hmatwiejczyk/next-test -f ./frontend/Dockerfile.dev ./frontend
-      - run:
-          name: test container
-          command: docker run hmatwiejczyk/next-test yarn test
+#       - checkout
+#       - setup_remote_docker
+#       - run:
+#           name: build container
+#           command: docker build -t hmatwiejczyk/next-test -f ./frontend/Dockerfile.dev ./frontend
+#       - run:
+#           name: test container
+#           command: docker run hmatwiejczyk/next-test yarn test

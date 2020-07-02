@@ -17,12 +17,24 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn test
+  build-frontend:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: build container
+          command: docker build -t hmatwiejczyk/epro-frontend ./frontend
 
 workflows:
   version: 2.1
   test:
     jobs:
       - test-frontend
+  build:
+    jobs:
+      - build-frontend
 # version: 2
 # jobs:
 #   test:

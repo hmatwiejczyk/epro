@@ -23,15 +23,9 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run:
-          name: build container
-          command: docker build -t hmatwiejczyk/epro-frontend ./frontend
-      - run:
-          name: login docker
-          command: echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_ID" --password-stdin
-      - run:
-          name: push frontend image
-          command: docker push hmatwiejczyk/epro-frontend
+      - run: docker build -t hmatwiejczyk/epro-frontend ./frontend
+      - run: echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_ID" --password-stdin
+      - run: docker push hmatwiejczyk/epro-frontend
 
 workflows:
   version: 2.1

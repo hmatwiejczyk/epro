@@ -31,18 +31,14 @@ workflows:
   version: 2.1
   build_and_test:
     jobs:
-      - test-frontend:
-          filters:
-            branches:
-              only:
-              - circleci-project-setup
+      - test-frontend
       - build-frontend:
           requires:
             - test-frontend
           filters:
             branches:
               only:
-              - circleci-project-setup
+              - master
       
 # version: 2
 # jobs:

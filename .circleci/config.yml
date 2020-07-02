@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: node:11.10.1
 
-    working_directory: ~/project/frontend
+    working_directory: ~/frontend
 
     steps:
       - checkout

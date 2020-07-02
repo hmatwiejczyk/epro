@@ -32,7 +32,13 @@ workflows:
   build_and_test:
     jobs:
       - test-frontend
+          filters:
+            branches:
+              - circleci-project-setup
       - build-frontend
+          filters:
+            branches:
+              - circleci-project-setup
       
 # version: 2
 # jobs:

@@ -37,7 +37,7 @@ jobs:
     steps:
       - checkout
       - run: sudo pip install --upgrade awsebcli
-      - run: eb init --region eu-central-1 --platform "arn:aws:elasticbeanstalk:eu-central-1::platform/Multi-container Docker running on 64bit Amazon Linux/2.20.3" epro
+      - run: eb init --region eu-central-1 --platform "arn:aws:elasticbeanstalk:eu-central-1::platform/Multi-container Docker running on 64bit Amazon Linux/2.20.4" epro
       - run: eb deploy Epro-env
 
 
@@ -60,26 +60,11 @@ workflows:
           filters:
             branches:
               only:
-              - circleci-project-setup
+              - master
       - deploy:
           requires:
             - build
           filters:
             branches:
               only:
-              - circleci-project-setup
-      
-# version: 2
-# jobs:
-#   test:
-#     docker:
-#       - image: circleci/node:10
-#     steps:
-#       - checkout
-#       - setup_remote_docker
-#       - run:
-#           name: build container
-#           command: docker build -t hmatwiejczyk/next-test -f ./frontend/Dockerfile.dev ./frontend
-#       - run:
-#           name: test container
-#           command: docker run hmatwiejczyk/next-test yarn test
+              - master

@@ -57,18 +57,18 @@ workflows:
           filters:
             branches:
               only:
-              - circleci-project-setup
+              - master
       - build:
           requires:
             - test-frontend
           filters:
             branches:
               only:
-              - circleci-project-setup
+              - master
       - deploy:
           requires:
             - build
           filters:
             branches:
               only:
-              - circleci-project-setup
+              - master

@@ -49,7 +49,7 @@ workflows:
           filters:
             branches:
               ignore:
-              - master
+                - master
 
   test_build_deploy:
     jobs:

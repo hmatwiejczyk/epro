@@ -57,7 +57,7 @@ workflows:
           filters:
             branches:
               only:
-              - circleci-project-setup
+              - master
       - build:
           requires:
             - test-frontend

@@ -41,7 +41,7 @@ jobs:
           command: sudo pip install --upgrade awsebcli
       - run:
           name: Deploying application to Elastic Beanstalk
-          command: eb deploy
+          command: eb deploy Epro-env
 
 
 workflows:

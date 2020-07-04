@@ -38,7 +38,7 @@ jobs:
       - checkout
       - run:
           name: Installing deployment dependencies
-          command: 'pip install awsebcli --upgrade'
+          command: sudo pip install --upgrade awsebcli
       - run:
           name: Deploying application to Elastic Beanstalk
           command: eb deploy
@@ -46,13 +46,13 @@ jobs:
 
 workflows:
   version: 2.1
-  test:
-    jobs:
-      - test-frontend:
-          filters:
-            branches:
-              ignore:
-                - master
+  # test:
+  #   jobs:
+  #     - test-frontend:
+  #         filters:
+  #           branches:
+  #             ignore:
+  #               - master
 
   test_build_deploy:
     jobs:

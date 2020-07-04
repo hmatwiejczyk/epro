@@ -23,13 +23,13 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker build -t hmatwiejczyk/epro-frontend ./frontend
-      - run: docker build -t hmatwiejczyk/epro-backend ./backend
-      - run: docker build -t hmatwiejczyk/epro-nginx ./nginx
+      - run: docker build -t hmsoftwareservices/epro-frontend ./frontend
+      - run: docker build -t hmsoftwareservices/epro-backend ./backend
+      - run: docker build -t hmsoftwareservices/epro-nginx ./nginx
       - run: echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_ID" --password-stdin
-      - run: docker push hmatwiejczyk/epro-frontend
-      - run: docker push hmatwiejczyk/epro-backend
-      - run: docker push hmatwiejczyk/epro-nginx
+      - run: docker push hmsoftwareservices/epro-frontend
+      - run: docker push hmsoftwareservices/epro-backend
+      - run: docker push hmsoftwareservices/epro-nginx
   deploy:
     working_directory: ~/app
     docker:

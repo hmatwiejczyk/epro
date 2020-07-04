@@ -43,27 +43,27 @@ jobs:
 
 workflows:
   version: 2.1
-  # test:
-  #   jobs:
-  #     - test-frontend:
-  #         filters:
-  #           branches:
-  #             ignore:
-  #               - master
+  test:
+    jobs:
+      - test-frontend:
+          filters:
+            branches:
+              ignore:
+                - master
 
   test_build_deploy:
     jobs:
-      # - test-frontend
-      # - build:
-      #     requires:
-      #       - test-frontend
-      #     filters:
-      #       branches:
-      #         only:
-      #         - circleci-project-setup
+      - test-frontend
+      - build:
+          requires:
+            - test-frontend
+          filters:
+            branches:
+              only:
+              - circleci-project-setup
       - deploy:
-          # requires:
-          #   - build
+          requires:
+            - build
           filters:
             branches:
               only:

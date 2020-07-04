@@ -37,7 +37,7 @@ jobs:
     steps:
       - checkout
       - run: sudo pip install --upgrade awsebcli
-      - run: eb init --region eu-west-1 epro
+      - run: eb init --region eu-central-1 --platform "Multi-container Docker running on 64bit Amazon Linux/2.20.3" epro
       - run: eb deploy
 
 

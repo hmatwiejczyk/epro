@@ -41,7 +41,7 @@ jobs:
           command: 'pip install awsebcli --upgrade'
       - run:
           name: Deploying application to Elastic Beanstalk
-          command: eb --version
+          command: eb deploy
 
 
 workflows:
@@ -56,14 +56,14 @@ workflows:
 
   test_build_deploy:
     jobs:
-      - test-frontend
-      - build:
-          requires:
-            - test-frontend
-          filters:
-            branches:
-              only:
-              - circleci-project-setup
+      # - test-frontend
+      # - build:
+      #     requires:
+      #       - test-frontend
+      #     filters:
+      #       branches:
+      #         only:
+      #         - circleci-project-setup
       - deploy:
           requires:
             - build

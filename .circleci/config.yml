@@ -41,7 +41,7 @@ jobs:
           command: sudo pip install --upgrade awsebcli
       - run:
           name: Deploying application to Elastic Beanstalk
-          command: eb init
+          command: eb deploy --profile default
 
 
 workflows:

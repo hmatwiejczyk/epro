@@ -1,0 +1,74 @@
+version: 2.1
+jobs:
+  test-frontend:
+    docker:
+      - image: node:12.13.0
+    working_directory: ~/repo/frontend
+    steps:
+      - checkout:
+          path: ~/repo
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: yarn test
+  build:
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: docker build -t hmatwiejczyk/epro-frontend ./frontend
+      - run: docker build -t hmatwiejczyk/epro-backend ./backend
+      - run: docker build -t hmatwiejczyk/epro-nginx ./nginx
+      - run: echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_ID" --password-stdin
+      - run: docker push hmatwiejczyk/epro-frontend
+      - run: docker push hmatwiejczyk/epro-backend
+      - run: docker push hmatwiejczyk/epro-nginx
+  deploy:
+    working_directory: ~/app
+    docker:
+      - image: circleci/python:latest
+    steps:
+      - checkout
+      - run: sudo pip install --upgrade awsebcli
+      - run: eb init --region eu-central-1 --platform "arn:aws:elasticbeanstalk:eu-central-1::platform/Multi-container Docker running on 64bit Amazon Linux/2.20.4" epro
+      - run: eb deploy Epro-env
+
+
+workflows:
+  version: 2.1
+  test:
+    jobs:
+      - test-frontend:
+          filters:
+            branches:
+              ignore:
+                - master
+
+  test_build_deploy:
+    jobs:
+      - test-frontend:
+          filters:
+            branches:
+              only:
+              - master
+      - build:
+          requires:
+            - test-frontend
+          filters:
+            branches:
+              only:
+              - master
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+              - master

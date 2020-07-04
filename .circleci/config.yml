@@ -39,10 +39,9 @@ jobs:
       - run:
           name: Installing deployment dependencies
           command: sudo pip install --upgrade awsebcli
-      - run : echo ${AWS_ACCESS_KEY_ID}
       - run:
           name: Deploying application to Elastic Beanstalk
-          command: eb deploy Epro-env
+          command: eb init
 
 
 workflows:

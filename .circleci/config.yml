@@ -36,12 +36,9 @@ jobs:
       - image: circleci/python:latest
     steps:
       - checkout
-      - run:
-          name: Installing deployment dependencies
-          command: sudo pip install --upgrade awsebcli
-      - run:
-          name: Deploying application to Elastic Beanstalk
-          command: eb deploy --profile default
+      - run: sudo pip install --upgrade awsebcli
+      - run: eb init --region eu-west-1 epro
+      - run: eb deploy
 
 
 workflows:
